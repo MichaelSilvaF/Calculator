@@ -1,0 +1,182 @@
+﻿<Window x:Class="Calculator.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Calculator"
+        mc:Ignorable="d"
+        Title="Mika's Calculator" 
+        Height="550"
+        Width="360"
+        Background="BlanchedAlmond"
+        ResizeMode="NoResize"
+        >
+
+    <Grid >
+
+        <Grid.Resources>
+
+            <!--#region Styles-->
+            <Style x:Key="CalcButtonStyle" TargetType="Button">
+                <Setter Property="FontSize" Value="24"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="5">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border"  Property="Background" Value="BlanchedAlmond"/>
+                                </Trigger>
+
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="BlanchedAlmond"/>
+                                </Trigger>
+
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="#CCFFEBCD"/>
+                                </Trigger>
+
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="border" Property="Opacity" Value="0.4"/>
+                                </Trigger>
+
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="CalcButtonBorderStyle" TargetType="Border">
+                <Setter Property="CornerRadius" Value="5"/>
+                <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="BorderBrush" Value="#22000000"/>
+                <Setter Property="Background" Value="GhostWhite"/>
+                <Setter Property="Width" Value="75"/>
+                <Setter Property="Height" Value="75"/>
+            </Style>
+            <!--#endregion-->
+
+        </Grid.Resources>
+
+        <!--#region Display-->
+        <Border Margin="15,15,0,0"
+        Width="315"
+        Height="75"
+        Background="GhostWhite"
+        BorderBrush="#22000000"
+        BorderThickness="5"
+        CornerRadius="12"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="Display"
+                 Grid.Column="0"
+                 Background="Transparent"
+                 FontSize="50"
+                 TextAlignment="Right"
+                 VerticalContentAlignment="Center"
+                 Padding="10,0"
+                 Text="0"
+                 BorderThickness="0"/>
+
+                <Button Grid.Column="1"
+                Content="⌫"
+                FontSize="20"
+                Style="{StaticResource CalcButtonStyle}"
+                BorderThickness="0"
+                Click="Backspace_Click" Background="#00000000"/>
+            </Grid>
+        </Border>
+
+        <!--#endregion-->
+
+        <!--#region Primeira linha-->
+        <Border Style="{StaticResource CalcButtonBorderStyle}" Margin="15,105,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top">
+            <Button Content="H" Style="{StaticResource CalcButtonStyle}" Click="History_Click"/>
+        </Border>
+        <Border Style="{StaticResource CalcButtonBorderStyle}" Margin="95,105,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top">
+            <Button Content="C" Style="{StaticResource CalcButtonStyle}" Click="Clear_Click"/>
+        </Border>
+        <Border Style="{StaticResource CalcButtonBorderStyle}" Margin="175,105,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top">
+            <Button Content="." Style="{StaticResource CalcButtonStyle}" Click="Number_Click"/>
+        </Border>
+        <Border Style="{StaticResource CalcButtonBorderStyle}" Margin="255,105,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top">
+            <Button Content="+" Style="{StaticResource CalcButtonStyle}" Click="Operator_Click"/>
+        </Border>
+        <!--#endregion-->
+
+        <!--#region Segunda linha-->
+        <Border Style="{StaticResource CalcButtonBorderStyle}" Margin="15,185,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top">
+            <Button Content="7" Style="{StaticResource CalcButtonStyle}" Click="Number_Click"/>
+        </Border>
+        <Border Style="{StaticResource CalcButtonBorderStyle}" Margin="95,185,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top">
+            <Button Content="8" Style="{StaticResource CalcButtonStyle}" Click="Number_Click"/>
+        </Border>
+        <Border Style="{StaticResource CalcButtonBorderStyle}" Margin="175,185,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top">
+            <Button Content="9" Style="{StaticResource CalcButtonStyle}" Click="Number_Click"/>
+        </Border>
+        <Border Style="{StaticResource CalcButtonBorderStyle}" Margin="255,185,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top">
+            <Button Content="-" Style="{StaticResource CalcButtonStyle}" Click="Operator_Click"/>
+        </Border>
+        <!--#endregion-->
+
+        <!--#region Terceira linha-->
+        <Border Style="{StaticResource CalcButtonBorderStyle}" Margin="15,265,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top">
+            <Button Content="4" Style="{StaticResource CalcButtonStyle}" Click="Number_Click"/>
+        </Border>
+
+        <Border Style="{StaticResource CalcButtonBorderStyle}" Margin="95,265,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top">
+            <Button Content="5" Style="{StaticResource CalcButtonStyle}" Click="Number_Click"/>
+        </Border>
+
+        <Border Style="{StaticResource CalcButtonBorderStyle}" Margin="175,265,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top">
+            <Button Content="6" Style="{StaticResource CalcButtonStyle}" Click="Number_Click"/>
+        </Border>
+
+        <Border Style="{StaticResource CalcButtonBorderStyle}" Margin="255,265,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top">
+            <Button Content="x" Style="{StaticResource CalcButtonStyle}" Click="Operator_Click"/>
+        </Border>
+        <!--#endregion-->
+
+        <!--#region Quarta linha-->
+        <Border Style="{StaticResource CalcButtonBorderStyle}" Margin="15,345,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top">
+            <Button Content="1" Style="{StaticResource CalcButtonStyle}" Click="Number_Click"/>
+        </Border>
+
+        <Border Style="{StaticResource CalcButtonBorderStyle}" Margin="95,345,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top">
+            <Button Content="2" Style="{StaticResource CalcButtonStyle}" Click="Number_Click"/>
+        </Border>
+
+        <Border Style="{StaticResource CalcButtonBorderStyle}" Margin="175,345,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top">
+            <Button Content="3" Style="{StaticResource CalcButtonStyle}" Click="Number_Click"/>
+        </Border>
+
+        <Border Style="{StaticResource CalcButtonBorderStyle}" Margin="255,345,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top">
+            <Button Content="/" Style="{StaticResource CalcButtonStyle}" Click="Operator_Click"/>
+        </Border>
+        <!--#endregion-->
+
+        <!--#region Quinta linha-->
+        <Border Style="{StaticResource CalcButtonBorderStyle}" Margin="15,425,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top">
+            <Button Content="0" Style="{StaticResource CalcButtonStyle}" Click="Number_Click"/>
+        </Border>
+
+        <Border Style="{StaticResource CalcButtonBorderStyle}" Margin="95,425,0,0" Width="235" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Button Content="=" Style="{StaticResource CalcButtonStyle}" Click="Equals_Click"/>
+        </Border>
+        <!--#endregion-->
+
+    </Grid>
+</Window>
